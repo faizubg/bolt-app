@@ -57,13 +57,46 @@
     button:hover {
       background: #269d35;
     }
-    .ride-info {
+    .ride-info, .thank-you, .payment-section, .payment-success {
       margin-top: 2rem;
       padding: 1rem;
       background: #f0f9f2;
       border-left: 4px solid #39b54a;
       border-radius: 6px;
       display: none;
+    }
+    .thank-you {
+      background: #e9ffe8;
+      color: #269d35;
+      border-left: 4px solid #b1e0b4;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+    .payment-section {
+      background: #fffce8;
+      border-left: 4px solid #ffc107;
+      color: #916500;
+    }
+    .payment-success {
+      background: #e8fff3;
+      border-left: 4px solid #39b54a;
+      color: #269d35;
+      text-align: center;
+    }
+    .payment-methods label {
+      font-weight: normal;
+      display: inline-block;
+      margin-right: 1rem;
+    }
+    .card-form input {
+      margin-bottom: 0.5rem;
+    }
+    .bank-details {
+      background: #f7fafc;
+      padding: 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+      font-size: 0.97rem;
     }
   </style>
 </head>
@@ -74,23 +107,105 @@
   </header>
   <div class="greetings">👋 Welcome to Bolt! Book your ride easily below.</div>
   <main>
-    <form id="bookingForm">
+    <form id="bookingForm" autocomplete="off">
       <h2>Passenger Details</h2>
       <label for="passengerName">Name</label>
       <input type="text" id="passengerName" name="passengerName" placeholder="Your Name" required />
 
       <label for="passengerPhone">Phone Number</label>
-      <input type="tel" id="passengerPhone" name="passengerPhone" placeholder="Your Phone Number" required />
+      <input type="tel" id="passengerPhone" name="passengerPhone" placeholder="Your Phone Number" required pattern="^\d{7,}$" />
 
       <label for="passengerEmail">Email</label>
       <input type="email" id="passengerEmail" name="passengerEmail" placeholder="Your Email" required />
 
       <h2>Ride Details</h2>
       <label for="pickup">Pickup Location</label>
-      <input type="text" id="pickup" name="pickup" placeholder="Enter pickup" required />
+      <select id="pickup" name="pickup" required>
+        <option value="">Select a location</option>
+        <option value="Gombe Line Motor Park">Gombe Line Motor Park</option>
+        <option value="Federal Teaching Hospital">Federal Teaching Hospital</option>
+        <option value="Gombe State University">Gombe State University</option>
+        <option value="Bajoga Road">Bajoga Road</option>
+        <option value="Pantami Market">Pantami Market</option>
+        <option value="Tumfure Junction">Tumfure Junction</option>
+        <option value="Emir's Palace">Emir's Palace</option>
+        <option value="Gombe Main Market">Gombe Main Market</option>
+        <option value="Gombe International Hotel">Gombe International Hotel</option>
+        <option value="TCNN Gombe">TCNN Gombe</option>
+        <option value="Abubakar Umar Memorial Stadium">Abubakar Umar Memorial Stadium</option>
+        <option value="Government House">Government House</option>
+        <option value="Tunfure Estate">Tunfure Estate</option>
+        <option value="London Maidorowa">London Maidorowa</option>
+        <option value="State Library">State Library</option>
+        <option value="Baban Layi">Baban Layi</option>
+        <option value="Herwagana">Herwagana</option>
+        <option value="Buba Shongo">Buba Shongo</option>
+        <option value="Yariman Jamiu Street">Yariman Jamiu Street</option>
+        <option value="Doma">Doma</option>
+        <option value="Jekadafari">Jekadafari</option>
+        <option value="Kagarawal">Kagarawal</option>
+        <option value="Arawa">Arawa</option>
+        <option value="Bajoga">Bajoga</option>
+        <option value="Bogo">Bogo</option>
+        <option value="Barunde">Barunde</option>
+        <option value="Kumbiya-Kumbiya">Kumbiya-Kumbiya</option>
+        <option value="Nasarawo">Nasarawo</option>
+        <option value="New GRA">New GRA</option>
+        <option value="Old GRA">Old GRA</option>
+        <option value="Shongo Idrisa">Shongo Idrisa</option>
+        <option value="Shongo Dinga">Shongo Dinga</option>
+        <option value="Bagadaza">Bagadaza</option>
+        <option value="Bagare">Bagare</option>
+        <option value="Bogo Road">Bogo Road</option>
+        <option value="Buba Shongo Street">Buba Shongo Street</option>
+        <option value="Pantami Layout">Pantami Layout</option>
+        <option value="Others">Other (type below)</option>
+      </select>
+      <input type="text" id="pickupOther" name="pickupOther" placeholder="Enter custom pickup (if 'Other')" style="display:none"/>
 
       <label for="dropoff">Dropoff Location</label>
-      <input type="text" id="dropoff" name="dropoff" placeholder="Enter dropoff" required />
+      <select id="dropoff" name="dropoff" required>
+        <option value="">Select a location</option>
+        <option value="Gombe Line Motor Park">Gombe Line Motor Park</option>
+        <option value="Federal Teaching Hospital">Federal Teaching Hospital</option>
+        <option value="Gombe State University">Gombe State University</option>
+        <option value="Bajoga Road">Bajoga Road</option>
+        <option value="Pantami Market">Pantami Market</option>
+        <option value="Tumfure Junction">Tumfure Junction</option>
+        <option value="Emir's Palace">Emir's Palace</option>
+        <option value="Gombe Main Market">Gombe Main Market</option>
+        <option value="Gombe International Hotel">Gombe International Hotel</option>
+        <option value="TCNN Gombe">TCNN Gombe</option>
+        <option value="Abubakar Umar Memorial Stadium">Abubakar Umar Memorial Stadium</option>
+        <option value="Government House">Government House</option>
+        <option value="Tunfure Estate">Tunfure Estate</option>
+        <option value="London Maidorowa">London Maidorowa</option>
+        <option value="State Library">State Library</option>
+        <option value="Baban Layi">Baban Layi</option>
+        <option value="Herwagana">Herwagana</option>
+        <option value="Buba Shongo">Buba Shongo</option>
+        <option value="Yariman Jamiu Street">Yariman Jamiu Street</option>
+        <option value="Doma">Doma</option>
+        <option value="Jekadafari">Jekadafari</option>
+        <option value="Kagarawal">Kagarawal</option>
+        <option value="Arawa">Arawa</option>
+        <option value="Bajoga">Bajoga</option>
+        <option value="Bogo">Bogo</option>
+        <option value="Barunde">Barunde</option>
+        <option value="Kumbiya-Kumbiya">Kumbiya-Kumbiya</option>
+        <option value="Nasarawo">Nasarawo</option>
+        <option value="New GRA">New GRA</option>
+        <option value="Old GRA">Old GRA</option>
+        <option value="Shongo Idrisa">Shongo Idrisa</option>
+        <option value="Shongo Dinga">Shongo Dinga</option>
+        <option value="Bagadaza">Bagadaza</option>
+        <option value="Bagare">Bagare</option>
+        <option value="Bogo Road">Bogo Road</option>
+        <option value="Buba Shongo Street">Buba Shongo Street</option>
+        <option value="Pantami Layout">Pantami Layout</option>
+        <option value="Others">Other (type below)</option>
+      </select>
+      <input type="text" id="dropoffOther" name="dropoffOther" placeholder="Enter custom dropoff (if 'Other')" style="display:none" />
 
       <label for="carType">Car Type</label>
       <select id="carType" name="carType" required>
@@ -112,19 +227,148 @@
       <p><strong>Car Type:</strong> <span id="carTypeInfo"></span></p>
       <p><strong>Status:</strong> <span style="color:green;">Searching for driver...</span></p>
     </div>
+    <div class="thank-you" id="thankYouMsg"></div>
+    <div class="payment-section" id="paymentSection">
+      <h2>Make Payment</h2>
+      <div class="payment-methods">
+        <label>
+          <input type="radio" name="paymentMethod" value="transfer" checked> Bank Transfer
+        </label>
+        <label>
+          <input type="radio" name="paymentMethod" value="card"> Card Payment
+        </label>
+      </div>
+      <div id="paymentDetails"></div>
+      <button id="payBtn">Pay Now</button>
+    </div>
+    <div class="payment-success" id="paymentSuccessMsg">
+      <!-- Payment success message will be set by JS -->
+    </div>
   </main>
   <script>
+    // Show/hide custom pickup input
+    document.getElementById('pickup').addEventListener('change', function() {
+      document.getElementById('pickupOther').style.display = (this.value === 'Others') ? 'block' : 'none';
+      if(this.value !== 'Others') document.getElementById('pickupOther').value = '';
+    });
+
+    // Show/hide custom dropoff input
+    document.getElementById('dropoff').addEventListener('change', function() {
+      document.getElementById('dropoffOther').style.display = (this.value === 'Others') ? 'block' : 'none';
+      if(this.value !== 'Others') document.getElementById('dropoffOther').value = '';
+    });
+
     const bookingForm = document.getElementById('bookingForm');
     const rideInfo = document.getElementById('rideInfo');
+    const thankYouMsg = document.getElementById('thankYouMsg');
+    const paymentSection = document.getElementById('paymentSection');
+    const paymentDetails = document.getElementById('paymentDetails');
+    const paymentSuccessMsg = document.getElementById('paymentSuccessMsg');
+    let currentName = "";
+
     bookingForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      document.getElementById('nameInfo').textContent = bookingForm.passengerName.value;
-      document.getElementById('phoneInfo').textContent = bookingForm.passengerPhone.value;
-      document.getElementById('emailInfo').textContent = bookingForm.passengerEmail.value;
-      document.getElementById('pickupInfo').textContent = bookingForm.pickup.value;
-      document.getElementById('dropoffInfo').textContent = bookingForm.dropoff.value;
-      document.getElementById('carTypeInfo').textContent = bookingForm.carType.options[bookingForm.carType.selectedIndex].text;
+
+      // Gather values (with custom location fallback)
+      const name = bookingForm.passengerName.value.trim();
+      const phone = bookingForm.passengerPhone.value.trim();
+      const email = bookingForm.passengerEmail.value.trim();
+      let pickup = bookingForm.pickup.value;
+      if(pickup === 'Others') pickup = bookingForm.pickupOther.value.trim();
+      let dropoff = bookingForm.dropoff.value;
+      if(dropoff === 'Others') dropoff = bookingForm.dropoffOther.value.trim();
+      const carType = bookingForm.carType.options[bookingForm.carType.selectedIndex].text;
+
+      // Simple validation
+      if(!name || !phone || !email || !pickup || !dropoff || carType === "Select a car") {
+        alert('Please fill in all fields correctly.');
+        return;
+      }
+      if(!/^\d{7,}$/.test(phone)) {
+        alert('Please enter a valid phone number (at least 7 digits, numbers only).');
+        return;
+      }
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      // If passed, show thank you and ride summary
+      document.getElementById('nameInfo').textContent = name;
+      document.getElementById('phoneInfo').textContent = phone;
+      document.getElementById('emailInfo').textContent = email;
+      document.getElementById('pickupInfo').textContent = pickup;
+      document.getElementById('dropoffInfo').textContent = dropoff;
+      document.getElementById('carTypeInfo').textContent = carType;
+
+      thankYouMsg.textContent = `✅ Thank you, ${name}! Your ride details have been verified.`;
+      thankYouMsg.style.display = 'block';
       rideInfo.style.display = 'block';
+
+      bookingForm.style.display = 'none';
+
+      // Show payment section
+      paymentSection.style.display = 'block';
+      showPaymentDetails('transfer');
+      currentName = name;
+    });
+
+    // Payment method switching
+    document.querySelectorAll('input[name="paymentMethod"]').forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        showPaymentDetails(this.value);
+      });
+    });
+
+    function showPaymentDetails(method) {
+      if(method === 'transfer') {
+        paymentDetails.innerHTML = `
+          <div class="bank-details">
+            <strong>Bank Transfer Details:</strong><br>
+            Bank: Opay<br>
+            Account Name: Babayo Faizu Gidado<br>
+            Account Number: <strong>9031953150</strong>
+          </div>
+          <small>After transfer, click "Pay Now" to complete.</small>
+        `;
+      } else if(method === 'card') {
+        paymentDetails.innerHTML = `
+          <form id="cardForm" class="card-form" onsubmit="return false;">
+            <input type="text" placeholder="Card Number" pattern="\\d{12,19}" required /><br>
+            <input type="text" placeholder="Expiry (MM/YY)" pattern="\\d{2}/\\d{2}" required /><br>
+            <input type="text" placeholder="CVV" pattern="\\d{3,4}" required /><br>
+          </form>
+        `;
+      }
+    }
+
+    document.getElementById('payBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+      if(selectedMethod === 'card') {
+        // Simple card validation
+        const cardForm = document.getElementById('cardForm');
+        if(cardForm) {
+          const [cardNum, exp, cvv] = cardForm.querySelectorAll('input');
+          if(!cardNum.value.match(/^\d{12,19}$/)) {
+            alert('Enter a valid card number.');
+            return;
+          }
+          if(!exp.value.match(/^\d{2}\/\d{2}$/)) {
+            alert('Enter a valid expiry (MM/YY).');
+            return;
+          }
+          if(!cvv.value.match(/^\d{3,4}$/)) {
+            alert('Enter a valid CVV.');
+            return;
+          }
+        }
+      }
+
+      paymentSection.style.display = 'none';
+      paymentSuccessMsg.textContent = `🎉 Payment successful! Thank you, ${currentName}, for booking with Bolt.`;
+      paymentSuccessMsg.style.display = 'block';
     });
   </script>
 </body>
