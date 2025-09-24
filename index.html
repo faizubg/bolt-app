@@ -1,1 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Bolt Transportation App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f7fa;
+    }
+    header {
+      background: #39b54a;
+      color: #fff;
+      padding: 1.5rem 0;
+      text-align: center;
+    }
+    .greetings {
+      background: #e9ffe8;
+      color: #269d35;
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.2rem;
+      border-bottom: 1px solid #39b54a;
+    }
+    main {
+      max-width: 400px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      padding: 2rem 1.5rem;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin: 1rem 0 0.25rem 0;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 0.65rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      background: #39b54a;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #269d35;
+    }
+    .ride-info {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: #f0f9f2;
+      border-left: 4px solid #39b54a;
+      border-radius: 6px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bolt Transportation</h1>
+    <p>Your ride, anytime, anywhere.</p>
+  </header>
+  <div class="greetings">👋 Welcome to Bolt! Book your ride easily below.</div>
+  <main>
+    <form id="bookingForm">
+      <h2>Passenger Details</h2>
+      <label for="passengerName">Name</label>
+      <input type="text" id="passengerName" name="passengerName" placeholder="Your Name" required />
 
+      <label for="passengerPhone">Phone Number</label>
+      <input type="tel" id="passengerPhone" name="passengerPhone" placeholder="Your Phone Number" required />
+
+      <label for="passengerEmail">Email</label>
+      <input type="email" id="passengerEmail" name="passengerEmail" placeholder="Your Email" required />
+
+      <h2>Ride Details</h2>
+      <label for="pickup">Pickup Location</label>
+      <input type="text" id="pickup" name="pickup" placeholder="Enter pickup" required />
+
+      <label for="dropoff">Dropoff Location</label>
+      <input type="text" id="dropoff" name="dropoff" placeholder="Enter dropoff" required />
+
+      <label for="carType">Car Type</label>
+      <select id="carType" name="carType" required>
+        <option value="">Select a car</option>
+        <option value="standard">Standard</option>
+        <option value="suv">SUV</option>
+        <option value="luxury">Luxury</option>
+      </select>
+
+      <button type="submit">Book Ride</button>
+    </form>
+    <div class="ride-info" id="rideInfo">
+      <h2>Ride Details</h2>
+      <p><strong>Name:</strong> <span id="nameInfo"></span></p>
+      <p><strong>Phone:</strong> <span id="phoneInfo"></span></p>
+      <p><strong>Email:</strong> <span id="emailInfo"></span></p>
+      <p><strong>Pickup:</strong> <span id="pickupInfo"></span></p>
+      <p><strong>Dropoff:</strong> <span id="dropoffInfo"></span></p>
+      <p><strong>Car Type:</strong> <span id="carTypeInfo"></span></p>
+      <p><strong>Status:</strong> <span style="color:green;">Searching for driver...</span></p>
+    </div>
+  </main>
+  <script>
+    const bookingForm = document.getElementById('bookingForm');
+    const rideInfo = document.getElementById('rideInfo');
+    bookingForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('nameInfo').textContent = bookingForm.passengerName.value;
+      document.getElementById('phoneInfo').textContent = bookingForm.passengerPhone.value;
+      document.getElementById('emailInfo').textContent = bookingForm.passengerEmail.value;
+      document.getElementById('pickupInfo').textContent = bookingForm.pickup.value;
+      document.getElementById('dropoffInfo').textContent = bookingForm.dropoff.value;
+      document.getElementById('carTypeInfo').textContent = bookingForm.carType.options[bookingForm.carType.selectedIndex].text;
+      rideInfo.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
